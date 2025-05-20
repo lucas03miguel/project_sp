@@ -1,3 +1,4 @@
+import argparse
 import tenseal
 import pandas as pd
 from utils import *
@@ -40,9 +41,21 @@ def excel_to_salary_lists(filename):
 
 
 if __name__ == "__main__":
-    male, female = excel_to_salary_lists("dataset.xlsx")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mode",
+                        choices=["encrypt", "decrypt"],
+                        default="encrypt",
+                        help="Executar apenas encrypt ou apenas decrypt.")
+    args = parser.parse_args()
 
-    encrypt(male, "encrypted_male_data")
-    encrypt(female, "encrypted_female_data")
+    if args.mode in ("encrypt"):
+        male, female = excel_to_salary_lists("dataset.xlsx")
+        print("Encrypting male data...")
+        encrypt(male, "encrypted_male_data")
 
-    decrypt("statistics")
+        print("Encrypting female data...")
+        encrypt(female, "encrypted_female_data")
+
+    elif args.mode in ("decrypt"):
+        print("Decrypting results...")
+        decrypt("statistics")
