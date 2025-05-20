@@ -1,6 +1,6 @@
 # Gender Pay Gap — Privacy Through Homomorphic Encryption
 
-Este repositório contém a implementação do **Step 2** do projecto *“Privacy Through Homomorphic Encryption”* para a unidade curricular **Security and Privacy (MSI 2024/2025)**. O objectivo é cifrar um *dataset* salarial e gerar os artefactos necessários para que um *Data Analyzer* consiga calcular, **sobre os dados cifrados**, a diferença média e o desvio percentual de remuneração entre mulheres e homens, tal como exige a **Diretiva (EU) 2023/970**.
+Este repositório contém a implementação do projecto *“Privacy Through Homomorphic Encryption”* para a unidade curricular **Security and Privacy (MSI 2024/2025)**. O objetivo é cifrar um *dataset* e gerar os artefactos necessários para que um *Data Analyzer* consiga calcular, **sobre os dados cifrados**, a diferença média e o desvio percentual de remuneração entre mulheres e homens, tal como exige a **Diretiva (EU) 2023/970**.
 
 ---
 
@@ -34,19 +34,17 @@ python utils.py
 
 ### 3 — Encriptar o dataset e desencriptar os resultados
 
+Inicialmente, vai dar erro por nao existir nenhum ficheiro `statistics`.
 ```bash
 python data_holder.py
 ```
 
-Inicialmente, vai dar erro por nao existir nenhum ficheiro `statistics`.
 Terá que correr então o próximo ficheiro
-
 ```bash
 python data_analyzer.py
 ```
 
-E depois voltar a correr o `data_analyzer.py`
-
+E depois voltar a correr o `data_holder.py`
 ```bash
 python data_holder.py
 ```
