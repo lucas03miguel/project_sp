@@ -58,7 +58,7 @@ python data_holder.py
 | Parâmetro             | Valor              |
 | --------------------- | ------------------ |
 | `poly_modulus_degree` | **16384**          |
-| `coeff_mod_bit_sizes` | `[60, 40, 40, 60]` |
+| `coeff_mod_bit_sizes` | `[60, 30, 30, 30, 30, 30, 30, 60]` |
 | `global_scale`        | `2**30`            |
 | Galois & Relinear     | Gerados            |
 
