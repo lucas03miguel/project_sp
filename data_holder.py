@@ -12,10 +12,22 @@ def encrypt(dataset, filename):
 def decrypt(filename):
     context = load_context()
     enc_proto = read_data(filename)
-    enc = tenseal.lazy_ckks_vector_from(enc_proto)
-    enc.link_context(context)
-    
-    print('Decrypted:', enc.decrypt())
+
+    offset = 0
+    vals = []
+    for _ in range(3):
+        length = int.from_bytes(enc_proto[offset:offset + 4], "little")
+        offset += 4
+        ct_serialized = enc_proto[offset:offset + length]
+        offset += length
+        ct = tenseal.ckks_vector_from(context, ct_serialized)
+        vals.append(ct.decrypt()[0])
+
+    mean_m, mean_f, gap_pct = vals
+    print(f"Média M         = {mean_m:.2f}")
+    print(f"Média F         = {mean_f:.2f}")
+    print(f"Percentage gap  = {gap_pct:.2f} %")
+
 
 
 def excel_to_salary_lists(filename):
@@ -33,11 +45,4 @@ if __name__ == "__main__":
     encrypt(male, "encrypted_male_data")
     encrypt(female, "encrypted_female_data")
 
-    decrypt("calculations")
-    #decrypt("encrypted_female_data")
-
-    #dataset = excel_to_salary_lists("dataset.xlsx")
-    #print(dataset)
-    #encrypt(dataset, "encrypted_data")
-
-    #decrypt("encrypted_data")
+    decrypt("statistics")
