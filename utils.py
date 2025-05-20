@@ -52,12 +52,12 @@ def main():
         context = tenseal.context(
             tenseal.SCHEME_TYPE.CKKS,
             poly_modulus_degree=16384,
-            coeff_mod_bit_sizes=[60, 30, 30, 30, 30, 30, 30, 60]
+            coeff_mod_bit_sizes=[60, 50, 40, 40, 40, 40, 40, 60]
         )
 
         context.generate_galois_keys()
         context.generate_relin_keys()
-        context.global_scale = 2**30
+        context.global_scale = 2**40
         
         secret_context = context.serialize(save_secret_key=True)
         write_data(secret_context, PRIVATE_KEY_FILENAME)
