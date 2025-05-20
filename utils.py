@@ -3,6 +3,7 @@ import os
 import tenseal
 
 PRIVATE_KEY_FILENAME = "private_key"
+PUBLIC_KEY_FILENAME = "public_key"
 
 
 def write_data(data: bytes, filename: str):
@@ -36,10 +37,7 @@ def pack_cts(*cts):
 
 
 def main():
-    private_key_filename = "private_key"
-    public_key_filename = "public_key"
-
-    if os.path.exists("files/" + private_key_filename) and os.path.exists("files/" + public_key_filename):
+    if os.path.exists("files/" + PRIVATE_KEY_FILENAME) and os.path.exists("files/" + PUBLIC_KEY_FILENAME):
         print("Private and public keys already exist.")
     
     else:
@@ -56,11 +54,11 @@ def main():
         context.global_scale = 2**30
         
         secret_context = context.serialize(save_secret_key=True)
-        write_data(secret_context, private_key_filename)
+        write_data(secret_context, PRIVATE_KEY_FILENAME)
         
         context.make_context_public()
         public_context = context.serialize()
-        write_data(public_context, public_key_filename)
+        write_data(public_context, PUBLIC_KEY_FILENAME)
 
 
 if __name__ == "__main__":
