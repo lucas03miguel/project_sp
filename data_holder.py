@@ -16,7 +16,7 @@ def decrypt(filename):
 
     offset = 0
     vals = []
-    for _ in range(3):
+    for _ in range(4):
         length = int.from_bytes(enc_proto[offset:offset + 4], "little")
         offset += 4
         ct_serialized = enc_proto[offset:offset + length]
@@ -24,9 +24,10 @@ def decrypt(filename):
         ct = tenseal.ckks_vector_from(context, ct_serialized)
         vals.append(ct.decrypt()[0])
 
-    mean_m, mean_f, gap_pct = vals
+    mean_m, mean_f, gap, gap_pct = vals
     print(f"Média M         = {mean_m:.2f}")
     print(f"Média F         = {mean_f:.2f}")
+    print(f"Gap             = {gap:.2f}")
     print(f"Percentage gap  = {gap_pct:.2f} %")
 
 

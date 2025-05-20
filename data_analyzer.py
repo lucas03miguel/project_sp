@@ -24,13 +24,13 @@ def main():
 
     gap = average_male_salary - average_female_salary
 
-
     inv_guess = 1.0 / 100_000.0  
     inv_average_female_salary = inv_guess * (2.0 - average_female_salary * inv_guess)
     gap_percentage = gap * inv_average_female_salary * 100.0
 
+    
     print("Writing statistics to file...")
-    payload = pack_cts(average_male_salary, average_female_salary, gap_percentage)
+    payload = pack_cts(average_male_salary, average_female_salary, gap, gap_percentage)
     write_data(payload, "statistics")
 
 
