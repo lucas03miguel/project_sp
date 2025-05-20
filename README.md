@@ -35,20 +35,20 @@ python utils.py
 ### 3 — Encriptar o dataset e desencriptar os resultados
 
 ```bash
-python data_analyzer.py
+python data_holder.py
 ```
 
 Inicialmente, vai dar erro por nao existir nenhum ficheiro `statistics`.
 Terá que correr então o próximo ficheiro
 
 ```bash
-python data_holder.py
+python data_analyzer.py
 ```
 
 E depois voltar a correr o `data_analyzer.py`
 
 ```bash
-python data_analyzer.py
+python data_holder.py
 ```
 
 ---
