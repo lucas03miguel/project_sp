@@ -26,42 +26,41 @@ https://github.com/lucas03miguel/project_sp.git
 cd <repo>
 ```
 
-### 2 — Gerar os ficheiros cifrados (Step 2)
+### 2 — Gerar as chaves
 
 ```bash
 python utils.py
 ```
 
-* **Input** → `dataset.xlsx`
-* **Output** → `artifacts/enc_male.tenseal`, `enc_female.tenseal`, `enc_counts.tenseal`, `public_context.tenseal`
-* **Tempo de execução** (M1 Pro, 8‑cores): \~2,3 s • **Tamanho total** dos artefactos: 1,8 MB
-
-### 3 — Descifrar um resultado (quando regressar do Step 3)
+### 3 — Encriptar o dataset e desencriptar os resultados
 
 ```bash
-python decrypt.py --results artifacts/enc_results.tenseal \
-                  --secret_ctx secret_context.tenseal
+python data_analyzer.py
 ```
 
-Exemplo de saída:
+Inicialmente, vai dar erro por nao existir nenhum ficheiro `statistics`.
+Terá que correr então o próximo ficheiro
 
+```bash
+python data_holder.py
 ```
-Homens – média: 99 661.3 $
-Mulheres – média: 96 654.6 $
-Diferença absoluta: 3 006.7 $
-Desvio relativo: 3.11 %
+
+E depois voltar a correr o `data_analyzer.py`
+
+```bash
+python data_analyzer.py
 ```
 
 ---
 
 ## Parâmetros CKKS adoptados
 
-| Parâmetro             | Valor              | Justificação                                                        |
-| --------------------- | ------------------ | ------------------------------------------------------------------- |
-| `poly_modulus_degree` | **8192**           | Segurança \~128‑bit e capacidade para vectores ≥ 4096.              |
-| `coeff_mod_bit_sizes` | `[60, 40, 40, 60]` | Permite \~3 multiplicações de profundidade com *global scale* 2^40. |
-| `global_scale`        | `2**40`            | Compromisso precisão × crescimento do ruído.                        |
-| Galois & Relinear     | Gerados            | Necessários para somas rotativas e relinearização.                  |
+| Parâmetro             | Valor              |
+| --------------------- | ------------------ |
+| `poly_modulus_degree` | **16384**          |
+| `coeff_mod_bit_sizes` | `[60, 40, 40, 60]` |
+| `global_scale`        | `2**30`            |
+| Galois & Relinear     | Gerados            |
 
 ---
 
@@ -71,15 +70,3 @@ Desvio relativo: 3.11 %
 | ---------------------- | --------------------- |
 | `Gender`               | categórico (`F`, `M`) |
 | `Base Salary/Year ($)` | float                 |
-
-
----
-
-## Conformidade com a Diretiva (EU) 2023/970
-
-* As únicas métricas exigidas são:
-
-  1. **Diferença média absoluta** de remuneração (homens − mulheres).
-  2. **Desvio %** relativo ao salário médio feminino.
-* O limiar regulamentar é **5 %** → se ultrapassado, inicia‑se *joint pay assessment*.
-* Como todos os cálculos são feitos sobre HE‑CKKS, **nenhum salário individual é exposto** em qualquer fase.
