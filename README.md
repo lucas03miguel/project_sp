@@ -9,53 +9,27 @@ Este repositório contém a implementação do **Step 2** do projecto *“Priva
 | Caminho/Ficheiro         | Papel  |
 | ------------------------ | ------------------------ |
 | `dataset.xlsx`           | *Dataset* (10 398 linhas); colunas: `ID`, `Gender`, `Base Salary/Year ($)` |
-| `encrypt.py`             | Encripta o dataset |
-| `decrypt.py`             | Desencripta os resutlados |
-| `requirements.txt`       | Dependências Python (versões fixadas) |
-| `artifacts/`             | Pasta gerada automaticamente com os ficheiros cifrados |
-| `secret_context.tenseal` | Contexto completo **com** chave secreta |
+| `data_analyzer.py`       | Realiza as operações estatísticas |
+| `data_holder.py`         | Encripta o dataset e desencripta os resultados |
+| `utils.py`               | Funções auxiliares |
 | `README.md`              | Este documento |
-
----
-
-## ⚙️ Pré‑requisitos
-
-| Software | Versão testada   |
-| -------- | ---------------- |
-| Python   | **3.10 ou 3.11** |
-| pip      | ≥ 23.0           |
-| TenSEAL  | **0.4.5**        |
-| pandas   | ≥ 2.2            |
-
-> Para outras versões de Python poderá ser necessário recompilar as dependências C++ de TenSEAL.
 
 ---
 
 ## Como executar
 
-### 1 — Clonar o repositório e instalar dependências
+### 1 — Clonar o repositório
 
 ```bash
 # clone
 https://github.com/lucas03miguel/project_sp.git
 cd <repo>
-
-# ambiente virtual
-python -m venv venv
-source venv/bin/activate  # Windows: .\venv\Scripts\activate
-
-# packages
-pip install -r requirements.txt
 ```
 
 ### 2 — Gerar os ficheiros cifrados (Step 2)
 
 ```bash
-python encrypt.py \
-  --input dataset.xlsx \
-  --outdir artifacts/ \
-  --poly-degree 8192 \
-  --scale-bits 40
+python utils.py
 ```
 
 * **Input** → `dataset.xlsx`
