@@ -52,8 +52,11 @@ Como alternativa correr:
 ```bash
 make
 ```
-
-
+ou
+```bash
+make rm
+```
+se quiser remover necessitar dar reload às chaves ou a algum ficheiro na pasta ```files/```
 
 ---
 ## Parâmetros CKKS adoptados
