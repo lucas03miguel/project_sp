@@ -34,23 +34,28 @@ python utils.py
 
 ### 3 — Encriptar o dataset e desencriptar os resultados
 
-Inicialmente, vai dar erro por nao existir nenhum ficheiro `statistics`.
+Para encriptar os dados:
 ```bash
-python data_holder.py
+python data_holder.py --mode encrypt
 ```
 
-Terá que correr então o próximo ficheiro
+Depois, para calcular as estatísticas:
 ```bash
 python data_analyzer.py
 ```
-
-E depois voltar a correr o `data_holder.py`
+Por último, para desencriptar os resultados:
 ```bash
-python data_holder.py
+python data_holder.py --mode decrypt
+```
+---
+Como alternativa correr:
+```bash
+make
 ```
 
----
 
+
+---
 ## Parâmetros CKKS adoptados
 
 | Parâmetro             | Valor              |
