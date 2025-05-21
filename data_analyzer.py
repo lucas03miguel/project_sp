@@ -4,7 +4,7 @@ from utils import *
 def main():
     print("Calculating statistics...")
 
-    context = load_context()
+    context = load_context_public()
     
     male_salary_proto = read_data("encrypted_male_data")
     male_salary_encrypted = tenseal.ckks_vector_from(context, male_salary_proto)

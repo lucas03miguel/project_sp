@@ -28,8 +28,12 @@ def read_data(filename: str) -> bytes:
     return base64.b64decode(data)
 
 
-def load_context():
+def load_context_secret():
     return tenseal.context_from(read_data(PRIVATE_KEY_FILENAME))
+
+
+def load_context_public():
+    return tenseal.context_from(read_data(PUBLIC_KEY_FILENAME))
 
 
 def pack_cts(*cts):

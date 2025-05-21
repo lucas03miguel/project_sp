@@ -5,13 +5,13 @@ from utils import *
 
 
 def encrypt(dataset, filename):
-    context = load_context()
+    context = load_context_secret()
     encrypted_data = tenseal.ckks_vector(context, dataset)
     write_data(encrypted_data.serialize(), filename)
 
 
 def decrypt(filename):
-    context = load_context()
+    context = load_context_secret()
     enc_proto = read_data(filename)
 
     offset = 0
